@@ -37,11 +37,20 @@ select re_buy, sum(sales) as Total
 from sale_CTE 
 group by re_buy 
 -- What products are more likely to be purchased again for different types of pets?
----Để trả lời cho câu hỏi trên, tôi lấy ra số lượng các lượt đánh giá dựa trên thang điểm từ 1 đến 10. Từ đó lấy ra các sản phẩm có điểm đánh giá cao nhất là 10 điểm, đó sẽ là các sản phẩm có khả năng được mua lại cao nhất.
----Lấy ra số lượng các lượt đánh giá dựa trên thang điểm từ 1 đến 10.
-Select rating, count(rating) as Amount from sale_CTE group by rating order by rating
----Lấy ra các sản phẩm có rating bằng 10
-Select * from sale_CTE where rating = 10
+---Để trả lời cho câu hỏi trên, tôi lấy ra số lượng các lượt đánh giá dựa trên thang điểm từ 1 đến 10. Từ đó lấy ra các sản phẩm có điểm đánh giá cao nhất là 10 điểm, đó sẽ là các sản phẩm có khả năng được mua lại cao nhất và so sánh các giá tổng số các sản phẩm được mua lại và không được mua lại dựa trên rating.
+---Lấy ra số lượng các lượt đánh giá dựa trên thang điểm từ 1 đến 10 và só sánh tổng lượng được mua lại và không được mua lại dựa trên rating.
+Select rating, re_buy, count(*) as Amount 
+from sale_CTE 
+group by rating, re_buy
+order by rating
+---Lấy ra các sản phẩm có rating bằng 10 và được mua lại 
+Select * from sale_CTE where rating = 10 and re_buy = 1
+
+
+
+
+
+
 
 
 
